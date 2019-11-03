@@ -1,5 +1,6 @@
 package br.com.rubensrodrigues.estoquerxjava.remoto
 
+import br.com.rubensrodrigues.estoquerxjava.model.Produto
 import io.reactivex.Single
 import retrofit2.http.*
 

@@ -1,4 +1,4 @@
-package br.com.rubensrodrigues.estoquerxjava.ui
+package br.com.rubensrodrigues.estoquerxjava.ui.lista
 
 import br.com.rubensrodrigues.estoquerxjava.model.Produto
 

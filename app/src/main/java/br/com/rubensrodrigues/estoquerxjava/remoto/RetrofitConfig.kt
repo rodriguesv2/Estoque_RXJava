@@ -26,5 +26,5 @@ class RetrofitConfig {
     private fun getLogging() =
         HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
 
-    fun getProdutoService() = this.retrofit.create(Produto::class.java)
+    fun getProdutoService() = this.retrofit.create(ProdutoService::class.java)
 }
