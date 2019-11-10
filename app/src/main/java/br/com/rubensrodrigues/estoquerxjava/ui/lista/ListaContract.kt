@@ -5,10 +5,12 @@ import br.com.rubensrodrigues.estoquerxjava.model.Produto
 class ListaContract {
 
     interface View{
-        fun mostrarLista()
+        fun mostrarLista(produtos: List<Produto>)
     }
 
     interface Presenter{
-        fun carregarLista(produtos: List<Produto>)
+        fun carregarLista()
+        fun attachView(mvpView: View?)
+        fun detachView()
     }
 }
