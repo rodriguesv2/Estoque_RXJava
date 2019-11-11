@@ -64,4 +64,3 @@ class ListaActivity : AppCompatActivity(), ListaContract.View {
         adapter.produtos = produtos
     }
 }
--
