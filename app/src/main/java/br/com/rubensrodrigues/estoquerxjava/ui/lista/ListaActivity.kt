@@ -11,7 +11,6 @@ import br.com.rubensrodrigues.estoquerxjava.ui.toast
 import kotlinx.android.synthetic.main.activity_lista.*
 
 class ListaActivity : AppCompatActivity(), ListaContract.View {
-
     private val presenter by lazy {
         ListaPresenter().apply {
             attachView(this@ListaActivity)
@@ -44,6 +43,11 @@ class ListaActivity : AppCompatActivity(), ListaContract.View {
         presenter.carregarLista()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.detachView()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_add, menu)
         return super.onCreateOptionsMenu(menu)
@@ -58,6 +62,10 @@ class ListaActivity : AppCompatActivity(), ListaContract.View {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun mostrarErro(mensagem: String) {
+        toast(getString(R.string.erro_api, mensagem))
     }
 
     override fun mostrarLista(produtos: List<Produto>) {

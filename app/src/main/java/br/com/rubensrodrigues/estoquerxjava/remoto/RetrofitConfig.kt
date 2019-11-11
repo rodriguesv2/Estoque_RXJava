@@ -10,7 +10,7 @@ class RetrofitConfig {
 
     private val retrofit by lazy {
         Retrofit.Builder()
-            .baseUrl("https://localhost:8080/")
+            .baseUrl("http://192.168.0.129:8080/")
             .addConverterFactory(JacksonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(getClientHttp())
@@ -26,5 +26,5 @@ class RetrofitConfig {
     private fun getLogging() =
         HttpLoggingInterceptor().apply { level = HttpLoggingInterceptor.Level.BODY }
 
-    fun getProdutoService() = this.retrofit.create(ProdutoService::class.java)
+fun getProdutoService() = this.retrofit.create(ProdutoService::class.java)
 }

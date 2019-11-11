@@ -6,6 +6,7 @@ class ListaContract {
 
     interface View{
         fun mostrarLista(produtos: List<Produto>)
+        fun mostrarErro(mensagem: String)
     }
 
     interface Presenter{

@@ -2,4 +2,5 @@
     <string name="app_name">Estoque RXJava</string>
     <string name="quantidade_produto">Quant. %d</string>
     <string name="preco_produto">Preço R$ %.2f</string>
+    <string name="erro_api">Erro ao consultar produtos: %s</string>
 </resources>
