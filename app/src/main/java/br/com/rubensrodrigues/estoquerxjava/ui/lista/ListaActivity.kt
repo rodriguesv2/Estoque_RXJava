@@ -7,6 +7,7 @@ import android.view.*
 import android.widget.Toast
 import br.com.rubensrodrigues.estoquerxjava.R
 import br.com.rubensrodrigues.estoquerxjava.model.Produto
+import br.com.rubensrodrigues.estoquerxjava.ui.formulario.intentParaFormulario
 import br.com.rubensrodrigues.estoquerxjava.ui.toast
 import kotlinx.android.synthetic.main.activity_lista.*
 
@@ -48,6 +49,11 @@ class ListaActivity : AppCompatActivity(), ListaContract.View {
         presenter.detachView()
     }
 
+    override fun onResume() {
+        super.onResume()
+        presenter.carregarLista()
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_add, menu)
         return super.onCreateOptionsMenu(menu)
@@ -56,8 +62,7 @@ class ListaActivity : AppCompatActivity(), ListaContract.View {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId){
             R.id.menuItemAdd -> {
-                Log.i("MENU", "Toque")
-                toast("Add pressionado")
+                startActivity(intentParaFormulario())
             }
         }
 

@@ -1,6 +1,7 @@
 package br.com.rubensrodrigues.estoquerxjava.remoto
 
 import br.com.rubensrodrigues.estoquerxjava.model.Produto
+import br.com.rubensrodrigues.estoquerxjava.model.ProdutoRequest
 import io.reactivex.Single
 import retrofit2.http.*
 
@@ -10,7 +11,7 @@ interface ProdutoService {
     fun getProdutos(): Single<List<Produto>>
 
     @POST("produto")
-    fun sendProduto(): Single<Produto>
+    fun sendProduto(@Body produto: ProdutoRequest): Single<Produto>
 
     @PUT("produto/{id}")
     fun updateProduto(@Path("id") id: Int): Single<Produto>
