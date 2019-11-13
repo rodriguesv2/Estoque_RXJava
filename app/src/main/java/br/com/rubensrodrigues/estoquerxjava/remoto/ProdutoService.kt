@@ -14,7 +14,7 @@ interface ProdutoService {
     fun sendProduto(@Body produto: ProdutoRequest): Single<Produto>
 
     @PUT("produto/{id}")
-    fun updateProduto(@Path("id") id: Int): Single<Produto>
+    fun updateProduto(@Path("id") id: Int, @Body produto: ProdutoRequest): Single<Produto>
 
     @DELETE("produto/{id}")
     fun deleteProduto(@Path("id") id: Int): Single<Produto>

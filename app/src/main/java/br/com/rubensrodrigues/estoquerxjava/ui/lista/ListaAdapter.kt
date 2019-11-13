@@ -9,7 +9,11 @@ import br.com.rubensrodrigues.estoquerxjava.R
 import br.com.rubensrodrigues.estoquerxjava.model.Produto
 import kotlinx.android.synthetic.main.item_produto.view.*
 
-class ListaAdapter(private val context: Context): RecyclerView.Adapter<ListaAdapter.ItemViewHolder>() {
+class ListaAdapter(
+    private val context: Context,
+    private val clickListener: (produto: Produto)->Unit,
+    private val onLongClickListener: (produto: Produto)->Unit
+): RecyclerView.Adapter<ListaAdapter.ItemViewHolder>() {
 
     var produtos: List<Produto> = listOf()
         set(value) {
@@ -37,6 +41,15 @@ class ListaAdapter(private val context: Context): RecyclerView.Adapter<ListaAdap
                 itemNome.text = produto.nome
                 itemPreco.text = context.getString(R.string.preco_produto, produto.preco)
                 itemQuantidade.text = context.getString(R.string.quantidade_produto, produto.quantidade)
+
+                setOnClickListener {
+                    clickListener(produto)
+                }
+
+                setOnLongClickListener {
+                    onLongClickListener(produto)
+                    true
+                }
             }
         }
     }

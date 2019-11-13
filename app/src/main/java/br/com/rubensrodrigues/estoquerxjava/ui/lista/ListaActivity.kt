@@ -1,10 +1,9 @@
 package br.com.rubensrodrigues.estoquerxjava.ui.lista
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.*
-import android.widget.Toast
+import android.view.Menu
+import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import br.com.rubensrodrigues.estoquerxjava.R
 import br.com.rubensrodrigues.estoquerxjava.model.Produto
 import br.com.rubensrodrigues.estoquerxjava.ui.formulario.intentParaFormulario
@@ -19,7 +18,12 @@ class ListaActivity : AppCompatActivity(), ListaContract.View {
     }
 
     private val adapter by lazy {
-        val adapter = ListaAdapter(this)
+        val adapter = ListaAdapter(this,
+            {
+                startActivity(intentParaFormulario(it))
+            }, {
+                toast(it.preco.toString())
+            })
         listaProdutos.adapter = adapter
         adapter
     }

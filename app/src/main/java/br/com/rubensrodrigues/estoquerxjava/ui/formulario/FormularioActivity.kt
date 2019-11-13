@@ -1,9 +1,12 @@
 package br.com.rubensrodrigues.estoquerxjava.ui.formulario
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import br.com.rubensrodrigues.estoquerxjava.Constants
 import br.com.rubensrodrigues.estoquerxjava.R
+import br.com.rubensrodrigues.estoquerxjava.model.Produto
 import br.com.rubensrodrigues.estoquerxjava.ui.toast
 import kotlinx.android.synthetic.main.activity_formulario.*
 import org.jetbrains.anko.intentFor
@@ -11,13 +14,27 @@ import org.jetbrains.anko.intentFor
 class FormularioActivity : AppCompatActivity(), FormularioContract.View {
 
     private val presenter by lazy {
-        FormularioPresenter().apply { attachView(this@FormularioActivity) }
+        var produto: Produto? = null
+        if (intent.hasExtra(Constants.PRODUTO_EDICAO)) {
+            produto = intent.getSerializableExtra(Constants.PRODUTO_EDICAO) as Produto
+        }
+        FormularioPresenter(produto).apply { attachView(this@FormularioActivity) }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_formulario)
 
+        presenter.preparaEdicao()
+        botaoCliqueListener()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        presenter.detachView()
+    }
+
+    private fun botaoCliqueListener() {
         formularioBotao.setOnClickListener {
             presenter.aoClicar(
                 formularioNome.text.toString(),
@@ -27,9 +44,10 @@ class FormularioActivity : AppCompatActivity(), FormularioContract.View {
         }
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        presenter.detachView()
+    override fun mostrarProdutoEdicao(produto: Produto) {
+        formularioNome.setText(produto.nome)
+        formularioPreco.setText(produto.preco.toString())
+        formularioQuantidade.setText(produto.quantidade.toString())
     }
 
     override fun voltarALista() {
@@ -41,4 +59,9 @@ class FormularioActivity : AppCompatActivity(), FormularioContract.View {
     }
 }
 
-fun Context.intentParaFormulario() = intentFor<FormularioActivity>()
+fun Context.intentParaFormulario(produto: Produto? = null): Intent{
+    return if (produto != null)
+        intentFor<FormularioActivity>(Constants.PRODUTO_EDICAO to produto)
+    else
+        intentFor<FormularioActivity>()
+}

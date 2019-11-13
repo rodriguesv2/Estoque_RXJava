@@ -1,6 +1,8 @@
 package br.com.rubensrodrigues.estoquerxjava.model
 
-class Produto {
+import java.io.Serializable
+
+class Produto : Serializable {
 
     var id: Int = -1
     var nome: String? = ""
