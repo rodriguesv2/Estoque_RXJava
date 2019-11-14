@@ -1,5 +1,6 @@
 package br.com.rubensrodrigues.estoquerxjava.ui.lista
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -22,7 +23,7 @@ class ListaActivity : AppCompatActivity(), ListaContract.View {
             {
                 startActivity(intentParaFormulario(it))
             }, {
-                toast(it.preco.toString())
+                dialogDeRemocao(it)
             })
         listaProdutos.adapter = adapter
         adapter
@@ -71,6 +72,17 @@ class ListaActivity : AppCompatActivity(), ListaContract.View {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun dialogDeRemocao(produto: Produto) {
+        AlertDialog.Builder(this)
+            .setTitle("Remover")
+            .setMessage("Deseja remover o produto?")
+            .setNegativeButton("Não", null)
+            .setPositiveButton("Sim") { dialog, which ->
+                presenter.removeProduto(produto)
+            }
+            .show()
     }
 
     override fun mostrarErro(mensagem: String) {

@@ -11,6 +11,7 @@ class ListaContract {
 
     interface Presenter{
         fun carregarLista()
+        fun removeProduto(produto: Produto)
         fun attachView(mvpView: View?)
         fun detachView()
     }
