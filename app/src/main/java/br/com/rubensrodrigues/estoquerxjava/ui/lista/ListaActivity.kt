@@ -19,8 +19,7 @@ class ListaActivity : AppCompatActivity(), ListaContract.View {
     }
 
     private val adapter by lazy {
-        val adapter = ListaAdapter(this,
-            {
+        val adapter = ListaAdapter(this, {
                 startActivity(intentParaFormulario(it))
             }, {
                 dialogDeRemocao(it)
