@@ -12,20 +12,21 @@ import br.com.rubensrodrigues.estoquerxjava.ui.toast
 import kotlinx.android.synthetic.main.activity_lista.*
 
 class ListaActivity : AppCompatActivity(), ListaContract.View {
+
+    private val adapter by lazy {
+        val adapter = ListaAdapter(this, {
+            startActivity(intentParaFormulario(it))
+        }, {
+            dialogDeRemocao(it)
+        })
+        listaProdutos.adapter = adapter
+        adapter
+    }
+
     private val presenter by lazy {
         ListaPresenter().apply {
             attachView(this@ListaActivity)
         }
-    }
-
-    private val adapter by lazy {
-        val adapter = ListaAdapter(this, {
-                startActivity(intentParaFormulario(it))
-            }, {
-                dialogDeRemocao(it)
-            })
-        listaProdutos.adapter = adapter
-        adapter
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
