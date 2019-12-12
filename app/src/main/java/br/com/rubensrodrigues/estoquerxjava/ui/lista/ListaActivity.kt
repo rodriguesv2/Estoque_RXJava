@@ -70,6 +70,7 @@ class ListaActivity : AppCompatActivity(), ListaContract.View {
                 presenter.removeProduto(produto)
             }
             .show()
+
     }
 
 
