@@ -77,7 +77,5 @@ class ListaActivity : AppCompatActivity(), ListaContract.View {
         toast(getString(R.string.erro_api, mensagem))
     }
 
-    override fun mostrarLista(produtos: List<Produto>) {
-        adapter.produtos = produtos
-    }
+    override fun mostrarLista(produtos: List<Produto>) { adapter.produtos = produtos }
 }
