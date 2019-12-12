@@ -72,6 +72,7 @@ class ListaActivity : AppCompatActivity(), ListaContract.View {
             .show()
     }
 
+
     override fun mostrarErro(mensagem: String) {
         toast(getString(R.string.erro_api, mensagem))
     }
